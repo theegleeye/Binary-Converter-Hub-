@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binary Converter Hub</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .binary-design {
+            letter-spacing: 10px;
+        }
+        .logo {
+            position: absolute;
+            top: 10px;
+            left: 20px;
+        }
+        input, output, select {
+            display: block;
+            margin: 20px auto;
+            padding: 10px;
+            font-size: 1.2em;
+            border-radius: 5px;
+            border: none;
+            width: 80%;
+            max-width: 500px;
+        }
+        .error {
+            color: red;
+        }
+           footer {
+            background-color: #222;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">
+        <img src="logo.png" alt="Limkokwihg University" width="100">
+    </div>
+    <div class="container">
+        <h1>Binary Converter Hub</h1>
+        <div class="binary-design">0 1 0 1 1 0 1 0 1 0 0 1 0 1</div>
+        <input type="text" id="binary-input" placeholder="Enter binary number">
+        <select id="conversion-type">
+            <option value="decimal">Decimal</option>
+            <option value="hexadecimal">Hexadecimal</option>
+            <option value="octal">Octal</option>
+        </select>
+        <div id="error-message" class="error"></div>
+        <output id="conversion-output"></output>
+    </div>
+     <footer>
+        www.LimkokwingUnivercity.com.
+        Design By Osman J Sesay, Kenneth Olu Jones, Victor S Karminty and Group.
+    </footer>
+
+    <script>
+        function convertBinary() {
+            const binary = document.getElementById('binary-input').value;
+            const conversionType = document.getElementById('conversion-type').value;
+            const errorMessage = document.getElementById('error-message');
+            const conversionOutput = document.getElementById('conversion-output');
+
+            if (binary === "" || /[^01]/.test(binary)) {
+                errorMessage.textContent = binary === "" ? "" : "Please enter a valid binary number.";
+                conversionOutput.textContent = "";
+            } else {
+                errorMessage.textContent = "";
+                const decimal = parseInt(binary, 2);
+                let result = "";
+                switch (conversionType) {
+                    case 'decimal':
+                        result = "Decimal: " + decimal;
+                        break;
+                    case 'hexadecimal':
+                        result = "Hexadecimal: " + decimal.toString(16).toUpperCase();
+                        break;
+                    case 'octal':
+                        result = "Octal: " + decimal.toString(8);
+                        break;
+                }
+                conversionOutput.textContent = result;
+            }
+        }
+
+        document.getElementById('binary-input').addEventListener('input', convertBinary);
+        document.getElementById('conversion-type').addEventListener('change', convertBinary);
+    </script>
+</body>
+</html>
